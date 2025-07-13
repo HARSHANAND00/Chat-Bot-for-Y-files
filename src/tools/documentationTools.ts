@@ -88,13 +88,13 @@ export async function handleGetTopics({
 /**
  * Scrape website content
  */
-export async function handleScrapeWebsite({
+export async function handleScrapeWebsite({ 
   url, 
   options = {} 
 }: {
   url: string; 
   options?: any; 
-}) {
+}) { 
   try {
     const result = await scrapingService.scrapeWebsite({ url, options });
     //TODO
