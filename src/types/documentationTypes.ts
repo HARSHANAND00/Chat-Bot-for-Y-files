@@ -28,6 +28,7 @@ export interface ScrapingOptions {
   followLinks?: boolean;
   extractMainContent?: boolean;
   removeNavigation?: boolean;
+  includeImages?:boolean;
 }
 
 export interface ScrapingResult {
