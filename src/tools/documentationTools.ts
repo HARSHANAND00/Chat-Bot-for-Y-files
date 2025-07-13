@@ -2,8 +2,6 @@ import { z } from "zod";
 import { DocumentationService } from "../services/documentationService.js";
 import { ScrapingService } from "../services/scrapingService.js";
 import { createErrorResponse, createSuccessResponse } from "../registry/toolRegistry.js";
-import axios from 'axios';
-import * as cheerio from 'cheerio';
 
 const documentationService = new DocumentationService();
 const scrapingService = new ScrapingService();
@@ -91,11 +89,11 @@ export async function handleGetTopics({
  * Scrape website content
  */
 export async function handleScrapeWebsite({
-  url,
-  options = {}
+  url, 
+  options = {} 
 }: {
-  url: string;
-  options?: any;
+  url: string; 
+  options?: any; 
 }) {
   try {
     const result = await scrapingService.scrapeWebsite({ url, options });
