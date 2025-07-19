@@ -18,9 +18,7 @@ async function ensureServicesInitialized() {
 
 // Schema definitions
 export const getTopicsSchema = {
-  category: z.string().optional().describe("Filter by category (optional)"),
-  tags: z.array(z.string()).optional().describe("Filter by tags (optional)"),
-  search: z.string().optional().describe("Search keyword (optional)"),
+  // No parameters needed - just return all available topics
 };
 
 export const getTopicContentSchema = {
@@ -35,38 +33,20 @@ export const scrapeWebsiteSchema = {
     extractMainContent: z.boolean().optional().describe("Extract only main content"),
     removeNavigation: z.boolean().optional().describe("Remove navigation elements"),
     includeImages: z.boolean().optional().describe("Include image references"),
-  }).optional().describe("Scraping options"),
+  }).optional().default({}).describe("Optional scraping configuration - use empty object {} if not needed"),
 };
 
 /**
  * Get available documentation topics
  */
-export async function handleGetTopics({ 
-  category, 
-  tags, 
-  search 
-}: { 
-  category?: string; 
-  tags?: string[]; 
-  search?: string; 
-}) {
+export async function handleGetTopics() {
   try {
     await ensureServicesInitialized();
 
-    let result;
-    console.log(`🔍 Getting documentation topics with category: ${category}, tags: ${tags}, search: ${search}`);
-    if (search) {
-      // If search term provided, search topics
-      const searchResults = await documentationService.searchTopics(search);
-      result = {
-        topics: searchResults,
-        totalCount: searchResults.length,
-        categories: [...new Set(searchResults.map(t => t.category))],
-      };
-    } else {
-      // Otherwise get filtered topics
-      result = await documentationService.getAvailableTopics(category, tags);
-    }
+    console.log(`🔍 Getting all available documentation topics`);
+    
+    // Get all topics without any filtering
+    const result = await documentationService.getAvailableTopics();
 
     // Format response for LLM
     const topicsText = result.topics.map(topic => {
@@ -79,8 +59,8 @@ export async function handleGetTopics({
       : '';
 
     const responseText = `# Documentation Topics Available\n\n` +
-      `Found ${result.totalCount} topic(s):\n\n${topicsText}${categoriesText}\n\n` +
-      `To get the LLM.txt content for any topic, use the topic ID with the scrape-website tool or request specific documentation.`;
+      `This server can help with ${result.totalCount} topic(s):\n\n${topicsText}${categoriesText}\n\n` +
+      `To get detailed content for any topic, use the 'get-topic-content' tool with the topic ID.`;
 
     return createSuccessResponse(responseText);
   } catch (error) {
@@ -92,7 +72,7 @@ export async function handleGetTopics({
 /**
  * Get content for a specific documentation topic
  */
-export async function handleGetTopicContent({ 
+export async function handleGetTopicContent({
   topicId 
 }: { 
   topicId: string; 
@@ -103,11 +83,12 @@ export async function handleGetTopicContent({
     console.log(`🔍 Getting content for topic: ${topicId}`);
     
     const content = await documentationService.getTopicContent(topicId);
-    
+
     if (!content) {
       return createErrorResponse(`Topic '${topicId}' not found or has no content`);
     }
     
+    // Return clean LLM.txt content without modifications
     return createSuccessResponse(content);
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error getting topic content';
@@ -120,16 +101,19 @@ export async function handleGetTopicContent({
  */
 export async function handleScrapeWebsite({ 
   url, 
-  options = {} 
+  options 
 }: { 
   url: string; 
   options?: any; 
 }) {
   try {
-    const result = await scrapingService.scrapeWebsite({ url, options });
-    //TODO
-   
-
+    // Ensure options is an object, default to empty object if not provided
+    const scrapingOptions = options && typeof options === 'object' ? options : {};
+    
+    console.log(`🔍 Scraping content from: ${url}`);
+    
+    const result = await scrapingService.scrapeWebsite({ url, options: scrapingOptions });
+ console.log(`🔍 Scraping content from: ${JSON.stringify(result)}`);
     return createSuccessResponse(result.content);
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error scraping website';
