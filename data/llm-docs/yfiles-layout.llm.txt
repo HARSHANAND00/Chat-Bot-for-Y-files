@@ -1,0 +1,53 @@
+# yFiles Layout Algorithms
+
+yFiles provides comprehensive layout algorithms for automatic graph arrangement. This documentation covers the main layout families and their configuration options.
+
+## Core Layout Algorithms
+
+### Hierarchical Layout
+Arranges nodes in layers with edges flowing in a consistent direction.
+- API Reference: https://docs.yworks.com/yfileshtml/#/api/yfiles.hierarchic#top
+- Configuration: https://docs.yworks.com/yfileshtml/#/api/HierarchicLayout
+- Edge Routing: https://docs.yworks.com/yfileshtml/#/api/HierarchicLayoutEdgeRoutingStyle
+
+### Tree Layout
+Optimized for tree and forest structures with customizable node positioning.
+- API Reference: https://docs.yworks.com/yfileshtml/#/api/yfiles.tree#top
+- Tree Styles: https://docs.yworks.com/yfileshtml/#/api/TreeLayout
+- Node Placers: https://docs.yworks.com/yfileshtml/#/api/TreeNodePlacer
+
+### Orthogonal Layout
+Creates layouts with only horizontal and vertical edge segments.
+- API Reference: https://docs.yworks.com/yfileshtml/#/api/yfiles.orthogonal#top
+- Configuration: https://docs.yworks.com/yfileshtml/#/api/OrthogonalLayout
+- Grid Settings: https://docs.yworks.com/yfileshtml/#/api/OrthogonalLayoutData
+
+### Organic Layout
+Force-directed algorithm that creates natural-looking layouts.
+- API Reference: https://docs.yworks.com/yfileshtml/#/api/yfiles.organic#top
+- Settings: https://docs.yworks.com/yfileshtml/#/api/OrganicLayout
+- Quality vs Speed: https://docs.yworks.com/yfileshtml/#/api/OrganicLayoutScope
+
+### Circular Layout
+Arranges nodes on concentric circles.
+- API Reference: https://docs.yworks.com/yfileshtml/#/api/yfiles.circular#top
+- Configuration: https://docs.yworks.com/yfileshtml/#/api/CircularLayout
+- Partitioning: https://docs.yworks.com/yfileshtml/#/api/CircularLayoutData
+
+## Layout Infrastructure
+
+### Layout Execution
+- Layout Basics: https://docs.yworks.com/yfileshtml/#/api/yfiles.layout#top
+- Layout Executor: https://docs.yworks.com/yfileshtml/#/api/LayoutExecutor
+- Animation: https://docs.yworks.com/yfileshtml/#/api/LayoutExecutorAsync
+
+### Layout Data
+- Configuration: https://docs.yworks.com/yfileshtml/#/api/LayoutData
+- Node Constraints: https://docs.yworks.com/yfileshtml/#/api/LayoutGraphAdapter
+- Edge Constraints: https://docs.yworks.com/yfileshtml/#/api/EdgeConstraints
+
+### Edge Routing
+Advanced edge routing capabilities for all layout algorithms.
+- Router API: https://docs.yworks.com/yfileshtml/#/api/yfiles.router#top
+- Edge Bundling: https://docs.yworks.com/yfileshtml/#/api/EdgeBundling
+- Port Constraints: https://docs.yworks.com/yfileshtml/#/api/PortConstraint

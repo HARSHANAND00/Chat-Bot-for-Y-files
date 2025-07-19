@@ -9,6 +9,7 @@ export class ScrapingService {
    */
   async scrapeWebsite(request: ScrapingRequest): Promise<ScrapingResult> {
     const { url, options = {} } = request;
+
     const visited = new Set<string>();
     const rootUrl = new URL(url).origin;
     const maxDepth = options.maxDepth ?? 1;
