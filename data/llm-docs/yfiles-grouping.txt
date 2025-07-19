@@ -1,0 +1,29 @@
+# yFiles Grouping
+
+yFiles provides powerful grouping capabilities that allow you to organize your graph elements hierarchically.
+
+## Key Features
+
+- **Group Nodes**: Create parent nodes that contain child nodes
+- **Hierarchical Structure**: Build multi-level hierarchies
+- **Group Layouts**: Specialized layout algorithms for grouped content
+- **Interactive Folding**: Expand and collapse groups dynamically
+
+## Common Use Cases
+
+- Organizing large graphs into logical sections
+- Creating organizational charts
+- Building hierarchical diagrams
+- Implementing expand/collapse functionality
+
+## Basic Implementation
+
+```typescript
+// Create a group node
+const groupNode = graph.createGroupNode();
+
+// Add children to the group
+graph.setParent(childNode, groupNode);
+```
+
+For more detailed information, visit the official yFiles documentation.

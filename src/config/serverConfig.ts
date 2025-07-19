@@ -4,7 +4,10 @@ export const serverConfig = {
   userAgent: "mcp-doc/1.0",
   capabilities: {
     resources: {},
-    tools: {},
+    tools: {
+      // Indicate that this server supports tools
+      listChanged: true,
+    },
   },
 };
 

@@ -23,6 +23,10 @@ export const getTopicsSchema = {
   search: z.string().optional().describe("Search keyword (optional)"),
 };
 
+export const getTopicContentSchema = {
+  topicId: z.string().describe("The ID of the topic to get content for"),
+};
+
 export const scrapeWebsiteSchema = {
   url: z.string().url().describe("Website URL to scrape"),
   options: z.object({
@@ -50,7 +54,7 @@ export async function handleGetTopics({
     await ensureServicesInitialized();
 
     let result;
-
+    console.log(`🔍 Getting documentation topics with category: ${category}, tags: ${tags}, search: ${search}`);
     if (search) {
       // If search term provided, search topics
       const searchResults = await documentationService.searchTopics(search);
@@ -82,6 +86,32 @@ export async function handleGetTopics({
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error getting topics';
     return createErrorResponse(`Failed to get documentation topics: ${message}`);
+  }
+}
+
+/**
+ * Get content for a specific documentation topic
+ */
+export async function handleGetTopicContent({ 
+  topicId 
+}: { 
+  topicId: string; 
+}) {
+  try {
+    await ensureServicesInitialized();
+    
+    console.log(`🔍 Getting content for topic: ${topicId}`);
+    
+    const content = await documentationService.getTopicContent(topicId);
+    
+    if (!content) {
+      return createErrorResponse(`Topic '${topicId}' not found or has no content`);
+    }
+    
+    return createSuccessResponse(content);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'Unknown error getting topic content';
+    return createErrorResponse(`Failed to get topic content: ${message}`);
   }
 }
 

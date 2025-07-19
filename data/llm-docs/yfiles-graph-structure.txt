@@ -1,0 +1,28 @@
+# yFiles Graph Structure
+
+Understanding the fundamental graph structure is essential for working with yFiles.
+
+## Core Components
+
+- **Nodes**: Vertices in the graph
+- **Edges**: Connections between nodes
+- **Labels**: Text annotations
+- **Ports**: Connection points for edges
+
+## Graph Model
+
+The graph model in yFiles provides a clean separation between:
+- Structure (nodes and edges)
+- Presentation (visual appearance)
+- Behavior (user interaction)
+
+## Working with Graphs
+
+```typescript
+// Create nodes
+const node1 = graph.createNode();
+const node2 = graph.createNode();
+
+// Create edge
+const edge = graph.createEdge(node1, node2);
+```

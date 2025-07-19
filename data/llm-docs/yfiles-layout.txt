@@ -1,0 +1,23 @@
+# yFiles Layout Algorithms
+
+yFiles offers a comprehensive set of layout algorithms for different graph types and use cases.
+
+## Popular Layout Algorithms
+
+- **Hierarchical Layout**: For directed graphs with flow-like structures
+- **Organic Layout**: For general graphs with natural, organic appearance
+- **Orthogonal Layout**: For graphs with orthogonal edge routing
+- **Tree Layout**: For tree structures
+- **Circular Layout**: For circular arrangements
+
+## Layout Configuration
+
+Each layout algorithm can be configured with various parameters to achieve the desired appearance.
+
+## Example Usage
+
+```typescript
+// Apply hierarchical layout
+const layout = new HierarchicalLayout();
+graph.applyLayout(layout);
+```

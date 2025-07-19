@@ -11,7 +11,7 @@
     "start:sse": "node dist/index.js --transport=sse --port=3100",
     "dev": "tsc && node dist/index.js",
     "dev:stdio": "tsc && node dist/index.js --transport=stdio",
-    "dev:sse": "tsc && node dist/index.js --transport=sse --port=3000",
+    "dev:sse": "tsc && node dist/index.js --transport=sse --port=3100",
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rm -rf dist"
   },
